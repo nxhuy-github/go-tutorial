@@ -11,12 +11,19 @@ import "fmt"
 func main() {
 	// declare a variable
 	// when we declare a variable and assign it a value immediately, Go can IMPLY its data-type
-	var conferenceName = "Go Conference"
+	// var conferenceName = "Go Conference"
 	// like var but cannot be changed
-	const conferenceTickets = 50
-	var remainingTickets = 50
+	// const conferenceTickets = 50
+	// var remainingTickets = 50
 
 	// fmt.Printf("conferenceName is %T, remainingTickets is %T, conferenceTickets is %T\n", conferenceName, remainingTickets, conferenceTickets)
+
+	// SUGAR syntax
+	conferenceName := "Go Conference"
+	// but it DOESN'T if we want to create a constant
+	const conferenceTickets = 50
+	// and it DOESN'T too if we want to assign a TYPE for a variable
+	var remainingTickets int = 50
 
 	// fmt.Println("Welcome to", conferenceName, "booking application")
 	// fmt.Println("We have total of", conferenceTickets, "tickets and", remainingTickets, "are still available")
