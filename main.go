@@ -16,6 +16,7 @@ func main() {
 	// const conferenceTickets = 50
 	// var remainingTickets = 50
 
+	// %T to print the type of variable
 	// fmt.Printf("conferenceName is %T, remainingTickets is %T, conferenceTickets is %T\n", conferenceName, remainingTickets, conferenceTickets)
 
 	// SUGAR syntax
@@ -35,12 +36,29 @@ func main() {
 	fmt.Println("Get your tickets here to attend")
 
 	// Go is statically TYPED LANGUAGE
-	var userName string
+	var firstName string
+	var lastName string
+	var email string
 	var userTickets int
 	// ask user for their name
+	// instead of passing the VALUE of userName (which is empty)
+	// we pass the REFERENCE or the MEMORY ADDRESS of the var userName :))
+	fmt.Println("Enter your first name: ")
+	fmt.Scan(&firstName)
 
-	userName = "Tom"
-	userTickets = 2
-	fmt.Printf("User %v booked %v tickets. \n", userName, userTickets)
+	fmt.Println("Enter your last name: ")
+	fmt.Scan(&lastName)
+
+	fmt.Println("Enter your email: ")
+	fmt.Scan(&email)
+
+	// <<< Go POINTER >>>
+	// fmt.Println(remainingTickets)
+	// fmt.Println(&remainingTickets)
+	
+	fmt.Println("Enter number tickets: ")
+	fmt.Scan(&userTickets)
+	
+	fmt.Printf("Thank you for %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 
 }
