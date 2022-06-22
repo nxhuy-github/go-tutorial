@@ -35,7 +35,7 @@ func main() {
 	fmt.Printf("We have total of %v tickets and %v are still available.\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
 
-	// ARRAY in Go in FIXED SIZE, syntax: var <var_name> = [size] var_type {}
+	// ARRAY in Go is FIXED SIZE, syntax: var <var_name> = [size] var_type {}
 	// for ex: var bookings  = [50] string {}
 	// the SPACE here DOESN'T matter: var bookings  = [50]string{} is still valid
 	// ALTERNATIVE way to declare a empty array
