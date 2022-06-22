@@ -24,7 +24,7 @@ func main() {
 	// but it DOESN'T if we want to create a constant
 	const conferenceTickets = 50
 	// and it DOESN'T too if we want to assign a TYPE for a variable
-	var remainingTickets int = 50
+	var remainingTickets uint = 50
 
 	// fmt.Println("Welcome to", conferenceName, "booking application")
 	// fmt.Println("We have total of", conferenceTickets, "tickets and", remainingTickets, "are still available")
@@ -58,7 +58,11 @@ func main() {
 	
 	fmt.Println("Enter number tickets: ")
 	fmt.Scan(&userTickets)
+
+	// the reason of uint() here is bc the mismatch between remainingTickets (int) and userTickets (unint) 
+	remainingTickets -= uint(userTickets)
 	
 	fmt.Printf("Thank you for %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
+	fmt.Printf("%v tickets remaining for the conference", remainingTickets)
 
 }
