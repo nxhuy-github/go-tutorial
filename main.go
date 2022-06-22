@@ -39,7 +39,13 @@ func main() {
 	// for ex: var bookings  = [50] string {}
 	// the SPACE here DOESN'T matter: var bookings  = [50]string{} is still valid
 	// ALTERNATIVE way to declare a empty array
-	var bookings [50]string
+	// var bookings [50]string
+
+	// SLICE in Go is DYNAMIC SIZE 
+	// var bookings []string
+	// ALTERNATIVE way to declare a empty slice
+	// var bookings = []string{}
+	bookings := []string{}
 
 	// Go is statically TYPED LANGUAGE
 	var firstName string
@@ -67,14 +73,17 @@ func main() {
 
 	// the reason of uint() here is bc the mismatch between remainingTickets (int) and userTickets (unint)
 	remainingTickets -= uint(userTickets)
-	bookings[0] = firstName + " " + lastName
+	//bookings[0] = firstName + " " + lastName
+	bookings = append(bookings, firstName + " " + lastName)
 
-	fmt.Printf("The whole array: %v\n", bookings)
-	fmt.Printf("The first element array: %v\n", bookings[0])
-	fmt.Printf("Array type: %T\n", bookings)
-	fmt.Printf("Array length: %v\n", len(bookings))
+	// fmt.Printf("The whole array: %v\n", bookings)
+	// fmt.Printf("The first element array: %v\n", bookings[0])
+	// fmt.Printf("Array type: %T\n", bookings)
+	// fmt.Printf("Array length: %v\n", len(bookings))
 
 	fmt.Printf("Thank you for %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for the conference", remainingTickets)
+
+	fmt.Println("These are all our bookings: ", bookings)
 
 }
