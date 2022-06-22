@@ -32,8 +32,14 @@ func main() {
 
 	// Formatted PRINT
 	fmt.Printf("Welcome to %v booking application\n", conferenceName)
-	fmt.Printf("We have total of %v tickets and %v are still available.\n" , conferenceTickets, remainingTickets)
+	fmt.Printf("We have total of %v tickets and %v are still available.\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
+
+	// ARRAY in Go in FIXED SIZE, syntax: var <var_name> = [size] var_type {}
+	// for ex: var bookings  = [50] string {}
+	// the SPACE here DOESN'T matter: var bookings  = [50]string{} is still valid
+	// ALTERNATIVE way to declare a empty array
+	var bookings [50]string
 
 	// Go is statically TYPED LANGUAGE
 	var firstName string
@@ -55,13 +61,19 @@ func main() {
 	// <<< Go POINTER >>>
 	// fmt.Println(remainingTickets)
 	// fmt.Println(&remainingTickets)
-	
+
 	fmt.Println("Enter number tickets: ")
 	fmt.Scan(&userTickets)
 
-	// the reason of uint() here is bc the mismatch between remainingTickets (int) and userTickets (unint) 
+	// the reason of uint() here is bc the mismatch between remainingTickets (int) and userTickets (unint)
 	remainingTickets -= uint(userTickets)
-	
+	bookings[0] = firstName + " " + lastName
+
+	fmt.Printf("The whole array: %v\n", bookings)
+	fmt.Printf("The first element array: %v\n", bookings[0])
+	fmt.Printf("Array type: %T\n", bookings)
+	fmt.Printf("Array length: %v\n", len(bookings))
+
 	fmt.Printf("Thank you for %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for the conference", remainingTickets)
 
