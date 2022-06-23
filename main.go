@@ -45,7 +45,7 @@ func main() {
 	// ALTERNATIVE way to declare a empty array
 	// var bookings [50]string
 
-	// SLICE in Go is DYNAMIC SIZE 
+	// SLICE in Go is DYNAMIC SIZE
 	// var bookings []string
 	// ALTERNATIVE way to declare a empty slice
 	// var bookings = []string{}
@@ -57,7 +57,7 @@ func main() {
 		var firstName string
 		var lastName string
 		var email string
-		var userTickets int
+		var userTickets uint
 		// ask user for their name
 		// instead of passing the VALUE of userName (which is empty)
 		// we pass the REFERENCE or the MEMORY ADDRESS of the var userName :))
@@ -77,37 +77,50 @@ func main() {
 		fmt.Println("Enter number tickets: ")
 		fmt.Scan(&userTickets)
 
-		if userTickets > int(remainingTickets) {
-			fmt.Printf("We only have %v tickets remaining, so you can't book %v tickets", remainingTickets, userTickets)
-			continue
+		isValidName := len(firstName) >= 2 && len(lastName) >= 2 
+		var isValidEmail bool = strings.Contains(email, "@")
+		var isValidTicketNumber = userTickets > 0 && userTickets <= remainingTickets
+
+		if isValidName && isValidEmail && isValidTicketNumber {
+			// the reason of uint() here is bc the mismatch between remainingTickets (int) and userTickets (unint)
+			remainingTickets -= uint(userTickets)
+			//bookings[0] = firstName + " " + lastName
+			bookings = append(bookings, firstName+" "+lastName)
+
+			// fmt.Printf("The whole array: %v\n", bookings)
+			// fmt.Printf("The first element array: %v\n", bookings[0])
+			// fmt.Printf("Array type: %T\n", bookings)
+			// fmt.Printf("Array length: %v\n", len(bookings))
+
+			fmt.Printf("Thank you for %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
+			fmt.Printf("%v tickets remaining for the conference\n", remainingTickets)
+
+			firstNames := []string{}
+			// 'range' iterates over elements for different data structures (NOT ONLY arrays and slices)
+			for _, booking := range bookings {
+				var names = strings.Fields(booking)
+				// var firstName = names[0]
+				firstNames = append(firstNames, names[0])
+			}
+			fmt.Printf("The first names of booking are: %v\n", firstNames)
+
+			//var noTicketRemaining = remainingTickets == 0
+			if remainingTickets == 0 {
+				fmt.Println("Our conference is booked out. Come back next year.")
+				break
+			}
+		} else {
+			if !isValidName {
+				fmt.Println("Your first name or last name is too short, please try again")
+			}
+			if !isValidEmail {
+				fmt.Println("Your email address doesn't contain @, please try again")
+			}
+			if !isValidTicketNumber {
+				fmt.Println("Your number tickets is INVALID, please try again")
+			}
 		}
-		// the reason of uint() here is bc the mismatch between remainingTickets (int) and userTickets (unint)
-		remainingTickets -= uint(userTickets)
-		//bookings[0] = firstName + " " + lastName
-		bookings = append(bookings, firstName + " " + lastName)
 
-		// fmt.Printf("The whole array: %v\n", bookings)
-		// fmt.Printf("The first element array: %v\n", bookings[0])
-		// fmt.Printf("Array type: %T\n", bookings)
-		// fmt.Printf("Array length: %v\n", len(bookings))
-
-		fmt.Printf("Thank you for %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
-		fmt.Printf("%v tickets remaining for the conference\n", remainingTickets)
-
-		firstNames := []string{}
-		// 'range' iterates over elements for different data structures (NOT ONLY arrays and slices)
-		for _, booking := range bookings {
-			var names = strings.Fields(booking)
-			// var firstName = names[0]
-			firstNames = append(firstNames, names[0])
-		}
-		fmt.Printf("The first names of booking are: %v\n", firstNames)
-
-		//var noTicketRemaining = remainingTickets == 0
-		if remainingTickets == 0 {
-			fmt.Println("Our conference is booked out. Come back next year.")
-			break
-		}
 	}
 
 }
