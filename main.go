@@ -3,7 +3,11 @@
 package main
 
 // import built-in package in Go
-import "fmt"
+// each package is on a new line
+import (
+	"fmt"
+	"strings"
+)
 
 // ENTRYPOINT: Go need to know where to start our program
 // ENTRYPOINT is a MAIN function
@@ -47,43 +51,53 @@ func main() {
 	// var bookings = []string{}
 	bookings := []string{}
 
-	// Go is statically TYPED LANGUAGE
-	var firstName string
-	var lastName string
-	var email string
-	var userTickets int
-	// ask user for their name
-	// instead of passing the VALUE of userName (which is empty)
-	// we pass the REFERENCE or the MEMORY ADDRESS of the var userName :))
-	fmt.Println("Enter your first name: ")
-	fmt.Scan(&firstName)
+	// Go only has ONE keyword for LOOP
+	for {
+		// Go is statically TYPED LANGUAGE
+		var firstName string
+		var lastName string
+		var email string
+		var userTickets int
+		// ask user for their name
+		// instead of passing the VALUE of userName (which is empty)
+		// we pass the REFERENCE or the MEMORY ADDRESS of the var userName :))
+		fmt.Println("Enter your first name: ")
+		fmt.Scan(&firstName)
 
-	fmt.Println("Enter your last name: ")
-	fmt.Scan(&lastName)
+		fmt.Println("Enter your last name: ")
+		fmt.Scan(&lastName)
 
-	fmt.Println("Enter your email: ")
-	fmt.Scan(&email)
+		fmt.Println("Enter your email: ")
+		fmt.Scan(&email)
 
-	// <<< Go POINTER >>>
-	// fmt.Println(remainingTickets)
-	// fmt.Println(&remainingTickets)
+		// <<< Go POINTER >>>
+		// fmt.Println(remainingTickets)
+		// fmt.Println(&remainingTickets)
 
-	fmt.Println("Enter number tickets: ")
-	fmt.Scan(&userTickets)
+		fmt.Println("Enter number tickets: ")
+		fmt.Scan(&userTickets)
 
-	// the reason of uint() here is bc the mismatch between remainingTickets (int) and userTickets (unint)
-	remainingTickets -= uint(userTickets)
-	//bookings[0] = firstName + " " + lastName
-	bookings = append(bookings, firstName + " " + lastName)
+		// the reason of uint() here is bc the mismatch between remainingTickets (int) and userTickets (unint)
+		remainingTickets -= uint(userTickets)
+		//bookings[0] = firstName + " " + lastName
+		bookings = append(bookings, firstName + " " + lastName)
 
-	// fmt.Printf("The whole array: %v\n", bookings)
-	// fmt.Printf("The first element array: %v\n", bookings[0])
-	// fmt.Printf("Array type: %T\n", bookings)
-	// fmt.Printf("Array length: %v\n", len(bookings))
+		// fmt.Printf("The whole array: %v\n", bookings)
+		// fmt.Printf("The first element array: %v\n", bookings[0])
+		// fmt.Printf("Array type: %T\n", bookings)
+		// fmt.Printf("Array length: %v\n", len(bookings))
 
-	fmt.Printf("Thank you for %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
-	fmt.Printf("%v tickets remaining for the conference", remainingTickets)
+		fmt.Printf("Thank you for %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
+		fmt.Printf("%v tickets remaining for the conference\n", remainingTickets)
 
-	fmt.Println("These are all our bookings: ", bookings)
+		firstNames := []string{}
+		// 'range' iterates over elements for different data structures (NOT ONLY arrays and slices)
+		for _, booking := range bookings {
+			var names = strings.Fields(booking)
+			// var firstName = names[0]
+			firstNames = append(firstNames, names[0])
+		}
+		fmt.Printf("The first names of booking are: %v\n", firstNames)
+	}
 
 }
