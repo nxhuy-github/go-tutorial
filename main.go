@@ -77,6 +77,10 @@ func main() {
 		fmt.Println("Enter number tickets: ")
 		fmt.Scan(&userTickets)
 
+		if userTickets > int(remainingTickets) {
+			fmt.Printf("We only have %v tickets remaining, so you can't book %v tickets", remainingTickets, userTickets)
+			continue
+		}
 		// the reason of uint() here is bc the mismatch between remainingTickets (int) and userTickets (unint)
 		remainingTickets -= uint(userTickets)
 		//bookings[0] = firstName + " " + lastName
@@ -98,6 +102,12 @@ func main() {
 			firstNames = append(firstNames, names[0])
 		}
 		fmt.Printf("The first names of booking are: %v\n", firstNames)
+
+		//var noTicketRemaining = remainingTickets == 0
+		if remainingTickets == 0 {
+			fmt.Println("Our conference is booked out. Come back next year.")
+			break
+		}
 	}
 
 }
