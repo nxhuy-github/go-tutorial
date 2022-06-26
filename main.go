@@ -123,4 +123,17 @@ func main() {
 
 	}
 
+	
+	// city := "London"
+	// switch city {
+	// 	case "London":
+	// 		// execute something
+	// 	case "Singapore":
+	// 		// execute something
+	// 	case "New York":
+	// 		// execute something
+	// 	default:
+	// 		// execute something
+	// }
+
 }
