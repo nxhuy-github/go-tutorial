@@ -6,7 +6,6 @@
 // Package: declaration outside all functions -> can be used EVERYWHERE in the SAME package
 // Global: declaration outside all functions & UPPERCASE first letter -> can be used EVERYWHERE ACROSS ALL packages
 
-
 // The first statement in Go file must be PACKAGE
 package main
 
@@ -14,8 +13,8 @@ package main
 // each package is on a new line
 import (
 	"fmt"
-	"strings"
 	"go-tutorial/helper"
+	"strconv"
 )
 
 // Package Variable
@@ -66,7 +65,10 @@ func main() {
 	// var bookings []string
 	// ALTERNATIVE way to declare a empty slice
 	// var bookings = []string{}
-	bookings := []string{}
+	//bookings := []string{}
+
+	// Create a LIST OF MAP
+	bookings := make([]map[string]string, 0)
 
 	// Go only has ONE keyword for LOOP
 	for {
@@ -166,13 +168,13 @@ func greetUsers(conferenceName string, conferenceTickets int, remainingTickets u
 	fmt.Println("Get your tickets here to attend")
 }
 
-func printFirstName(bookings []string) []string {
+func printFirstName(bookings []map[string]string) []string {
 	firstNames := []string{}
 	// 'range' iterates over elements for different data structures (NOT ONLY arrays and slices)
 	for _, booking := range bookings {
-		var names = strings.Fields(booking)
+		// var names = strings.Fields(booking)
 		// var firstName = names[0]
-		firstNames = append(firstNames, names[0])
+		firstNames = append(firstNames, booking["firstName"])
 	}
 	return firstNames
 }
@@ -205,10 +207,20 @@ func getUserInput() (string, string, string, uint) {
 	return firstName, lastName, email, userTickets
 }
 
-func bookTicket(remainingTickets *uint,  userTickets uint, bookings *[]string, firstName string, lastName string, email string) {
-	*remainingTickets -= uint(userTickets)
+func bookTicket(remainingTickets *uint,  userTickets uint, bookings *[]map[string]string, firstName string, lastName string, email string) {
+	*remainingTickets -= userTickets
+
+	// create a MAP
+	// make() helps us create an EMPTY map
+	var userData = make(map[string]string)
+	userData["firstName"] = firstName
+	userData["lastName"] = lastName
+	userData["email"] = email
+	userData["userTickets"] = strconv.FormatUint(uint64(userTickets), 10)
 	
-	*bookings = append(*bookings, firstName+" "+lastName)
+	*bookings = append(*bookings, userData)
+	fmt.Printf("List of bookings is %v \n", *bookings)
+
 	fmt.Printf("Thank you for %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for the conference\n", *remainingTickets)
 }
