@@ -1,6 +1,11 @@
 // Go programs are organized into packages
 // A package is a collection of Go files
 
+// 3 levels of Scope
+// Local: declaration within function/block
+// Package: declaration outside all functions -> can be used EVERYWHERE in the SAME package
+// Global: declaration outside all functions & UPPERCASE first letter -> can be used EVERYWHERE ACROSS ALL packages
+
 
 // The first statement in Go file must be PACKAGE
 package main
