@@ -105,7 +105,7 @@ func main() {
 
 			// fmt.Printf("Thank you for %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 			// fmt.Printf("%v tickets remaining for the conference\n", remainingTickets)
-			bookTicket(remainingTickets ,  userTickets , bookings , firstName , lastName , email)
+			bookTicket(&remainingTickets ,  userTickets , &bookings , firstName , lastName , email)
 
 			// firstNames := []string{}
 			// // 'range' iterates over elements for different data structures (NOT ONLY arrays and slices)
@@ -196,10 +196,10 @@ func getUserInput() (string, string, string, uint) {
 	return firstName, lastName, email, userTickets
 }
 
-func bookTicket(remainingTickets uint,  userTickets uint, bookings []string, firstName string, lastName string, email string) {
-	remainingTickets -= uint(userTickets)
+func bookTicket(remainingTickets *uint,  userTickets uint, bookings *[]string, firstName string, lastName string, email string) {
+	*remainingTickets -= uint(userTickets)
 	
-	bookings = append(bookings, firstName+" "+lastName)
+	*bookings = append(*bookings, firstName+" "+lastName)
 	fmt.Printf("Thank you for %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
-	fmt.Printf("%v tickets remaining for the conference\n", remainingTickets)
+	fmt.Printf("%v tickets remaining for the conference\n", *remainingTickets)
 }
