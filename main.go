@@ -1,4 +1,7 @@
-// All our code must belong to a PACKAGE
+// Go programs are organized into packages
+// A package is a collection of Go files
+
+
 // The first statement in Go file must be PACKAGE
 package main
 
@@ -7,6 +10,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"go-tutorial/helper"
 )
 
 // Package Variable
@@ -90,7 +94,7 @@ func main() {
 		// isValidName := len(firstName) >= 2 && len(lastName) >= 2 
 		// var isValidEmail bool = strings.Contains(email, "@")
 		// var isValidTicketNumber = userTickets > 0 && userTickets <= remainingTickets
-		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets, remainingTickets)
+		isValidName, isValidEmail, isValidTicketNumber := helper.ValidateUserInput(firstName, lastName, email, userTickets, remainingTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 			// the reason of uint() here is bc the mismatch between remainingTickets (int) and userTickets (unint)
@@ -168,12 +172,12 @@ func printFirstName(bookings []string) []string {
 	return firstNames
 }
 
-func validateUserInput(firstName string, lastName string, email string, userTickets uint, remainingTickets uint) (bool, bool, bool) {
-	isValidName := len(firstName) >= 2 && len(lastName) >= 2 
-	var isValidEmail bool = strings.Contains(email, "@")
-	var isValidTicketNumber = userTickets > 0 && userTickets <= remainingTickets
-	return isValidName, isValidEmail, isValidTicketNumber
-}
+// func validateUserInput(firstName string, lastName string, email string, userTickets uint, remainingTickets uint) (bool, bool, bool) {
+// 	isValidName := len(firstName) >= 2 && len(lastName) >= 2 
+// 	var isValidEmail bool = strings.Contains(email, "@")
+// 	var isValidTicketNumber = userTickets > 0 && userTickets <= remainingTickets
+// 	return isValidName, isValidEmail, isValidTicketNumber
+// }
 
 func getUserInput() (string, string, string, uint) {
 	var firstName string
