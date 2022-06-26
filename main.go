@@ -9,6 +9,14 @@ import (
 	"strings"
 )
 
+// Package Variable
+// ERROR if use SUGAR SYNTAX: packageVariable := "package Variable" -> error
+var conferenceName = "Go Conference"
+// but it DOESN'T if we want to create a constant
+const conferenceTickets = 50
+// and it DOESN'T too if we want to assign a TYPE for a variable
+var remainingTickets uint = 50
+
 // ENTRYPOINT: Go need to know where to start our program
 // ENTRYPOINT is a MAIN function
 // meaning that for ONE Go application, we only need ONE MAIN function bc we only have ONE ENTRYPOINT
@@ -24,11 +32,11 @@ func main() {
 	// fmt.Printf("conferenceName is %T, remainingTickets is %T, conferenceTickets is %T\n", conferenceName, remainingTickets, conferenceTickets)
 
 	// SUGAR syntax
-	conferenceName := "Go Conference"
+	// conferenceName := "Go Conference"
 	// but it DOESN'T if we want to create a constant
-	const conferenceTickets = 50
+	// const conferenceTickets = 50
 	// and it DOESN'T too if we want to assign a TYPE for a variable
-	var remainingTickets uint = 50
+	// var remainingTickets uint = 50
 
 	// fmt.Println("Welcome to", conferenceName, "booking application")
 	// fmt.Println("We have total of", conferenceTickets, "tickets and", remainingTickets, "are still available")
