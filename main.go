@@ -14,6 +14,7 @@ package main
 import (
 	"fmt"
 	"go-tutorial/helper"
+	"time"
 )
 
 // Package Variable
@@ -128,6 +129,9 @@ func main() {
 			// fmt.Printf("Thank you for %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 			// fmt.Printf("%v tickets remaining for the conference\n", remainingTickets)
 			bookTicket(&remainingTickets ,  userTickets , &bookings , firstName , lastName , email)
+			// 'go' keyword starts a new goroutine which is 
+			// a lightweight thread managed by the Go runtime
+			go sendTicket(userTickets, firstName, lastName, email)
 
 			// firstNames := []string{}
 			// // 'range' iterates over elements for different data structures (NOT ONLY arrays and slices)
@@ -240,4 +244,12 @@ func bookTicket(remainingTickets *uint,  userTickets uint, bookings *[]UserData,
 
 	fmt.Printf("Thank you for %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for the conference\n", *remainingTickets)
+}
+
+func sendTicket(userTickets uint, firstName string, lastName string, email string)  {
+	time.Sleep(10 * time.Second) // 10 seconds
+	var ticket = fmt.Sprintf("%v tickets for %v %v", userTickets, firstName, lastName)
+	fmt.Println("######################")
+	fmt.Printf("Sending ticket:\n %v \nto email address %v\n", ticket, email)
+	fmt.Println("######################")
 }
