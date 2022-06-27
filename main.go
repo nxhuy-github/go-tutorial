@@ -14,6 +14,7 @@ package main
 import (
 	"fmt"
 	"go-tutorial/helper"
+	"sync"
 	"time"
 )
 
@@ -33,6 +34,10 @@ type UserData struct {
 	email string
 	numberOfTickets uint
 }
+
+// by default, the MAIN goroutine DOESN'T wait for other goroutines
+// WaitGroup waits for the launched goroutine to finish
+var wg = sync.WaitGroup{}
 
 // ENTRYPOINT: Go need to know where to start our program
 // ENTRYPOINT is a MAIN function
@@ -131,6 +136,8 @@ func main() {
 			bookTicket(&remainingTickets ,  userTickets , &bookings , firstName , lastName , email)
 			// 'go' keyword starts a new goroutine which is 
 			// a lightweight thread managed by the Go runtime
+			
+			wg.Add(1)
 			go sendTicket(userTickets, firstName, lastName, email)
 
 			// firstNames := []string{}
@@ -148,6 +155,7 @@ func main() {
 				fmt.Println("Our conference is booked out. Come back next year.")
 				break
 			}
+			
 		} else {
 			if !isValidName {
 				fmt.Println("Your first name or last name is too short, please try again")
@@ -161,7 +169,7 @@ func main() {
 		}
 
 	}
-
+	wg.Wait()
 	
 	// city := "London"
 	// switch city {
@@ -252,4 +260,5 @@ func sendTicket(userTickets uint, firstName string, lastName string, email strin
 	fmt.Println("######################")
 	fmt.Printf("Sending ticket:\n %v \nto email address %v\n", ticket, email)
 	fmt.Println("######################")
+	wg.Done()
 }
