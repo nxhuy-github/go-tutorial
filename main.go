@@ -14,7 +14,6 @@ package main
 import (
 	"fmt"
 	"go-tutorial/helper"
-	"strconv"
 )
 
 // Package Variable
@@ -24,6 +23,15 @@ var conferenceName = "Go Conference"
 const conferenceTickets = 50
 // and it DOESN'T too if we want to assign a TYPE for a variable
 var remainingTickets uint = 50
+
+// 'type' creates a NEW type with the name you specify
+// in this case: create a type called UserData based on a struct of firstName, lastName, ...
+type UserData struct {
+	firstName string
+	lastName string
+	email string
+	numberOfTickets uint
+}
 
 // ENTRYPOINT: Go need to know where to start our program
 // ENTRYPOINT is a MAIN function
@@ -68,7 +76,10 @@ func main() {
 	//bookings := []string{}
 
 	// Create a LIST OF MAP
-	bookings := make([]map[string]string, 0)
+	//bookings := make([]map[string]string, 0)
+
+	// Create a LIST OF UserData
+	bookings := make([]UserData, 0)
 
 	// Go only has ONE keyword for LOOP
 	for {
@@ -168,13 +179,13 @@ func greetUsers(conferenceName string, conferenceTickets int, remainingTickets u
 	fmt.Println("Get your tickets here to attend")
 }
 
-func printFirstName(bookings []map[string]string) []string {
+func printFirstName(bookings []UserData) []string {
 	firstNames := []string{}
 	// 'range' iterates over elements for different data structures (NOT ONLY arrays and slices)
 	for _, booking := range bookings {
 		// var names = strings.Fields(booking)
 		// var firstName = names[0]
-		firstNames = append(firstNames, booking["firstName"])
+		firstNames = append(firstNames, booking.firstName)
 	}
 	return firstNames
 }
@@ -207,17 +218,23 @@ func getUserInput() (string, string, string, uint) {
 	return firstName, lastName, email, userTickets
 }
 
-func bookTicket(remainingTickets *uint,  userTickets uint, bookings *[]map[string]string, firstName string, lastName string, email string) {
+func bookTicket(remainingTickets *uint,  userTickets uint, bookings *[]UserData, firstName string, lastName string, email string) {
 	*remainingTickets -= userTickets
 
 	// create a MAP
 	// make() helps us create an EMPTY map
-	var userData = make(map[string]string)
-	userData["firstName"] = firstName
-	userData["lastName"] = lastName
-	userData["email"] = email
-	userData["userTickets"] = strconv.FormatUint(uint64(userTickets), 10)
-	
+	// var userData = make(map[string]string)
+	// userData["firstName"] = firstName
+	// userData["lastName"] = lastName
+	// userData["email"] = email
+	// userData["userTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+	var userData = UserData{
+		firstName: firstName,
+		lastName: lastName,
+		email: email,
+		numberOfTickets: userTickets,
+	}
+
 	*bookings = append(*bookings, userData)
 	fmt.Printf("List of bookings is %v \n", *bookings)
 
